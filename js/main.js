@@ -2,7 +2,6 @@
    GOITOM GEBRESLASSIE PORTFOLIO — main.js
 ═══════════════════════════════════════════════════════════════ */
 
-/* ── THEME TOGGLE ─────────────────────────────────────────────── */
 const themeToggle = document.getElementById('themeToggle');
 const themeIcon   = document.getElementById('themeIcon');
 const html        = document.documentElement;
@@ -21,13 +20,11 @@ themeToggle.addEventListener('click', () => {
   setTheme(current === 'dark' ? 'light' : 'dark');
 });
 
-/* ── NAVBAR SCROLL ───────────────────────────────────────────── */
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
   navbar.classList.toggle('scrolled', window.scrollY > 50);
 });
 
-/* ── HAMBURGER ───────────────────────────────────────────────── */
 const hamburger = document.getElementById('hamburger');
 const navLinks  = document.getElementById('nav-links');
 
@@ -43,7 +40,6 @@ navLinks.querySelectorAll('a').forEach(link => {
   });
 });
 
-/* ── TYPEWRITER ──────────────────────────────────────────────── */
 const titles = [
   'Founder of Gemed Solutions',
   'Full Stack Developer',
@@ -79,7 +75,6 @@ function typeLoop() {
 }
 typeLoop();
 
-/* ── INTERSECTION OBSERVER (AOS) ────────────────────────────── */
 const observer = new IntersectionObserver(
   entries => {
     entries.forEach(e => {
@@ -94,7 +89,6 @@ const observer = new IntersectionObserver(
 
 document.querySelectorAll('[data-aos]').forEach(el => observer.observe(el));
 
-/* ── ACTIVE NAV HIGHLIGHT ─────────────────────────────────────── */
 const sections = document.querySelectorAll('section[id]');
 const navItems  = document.querySelectorAll('.nav-links a');
 
@@ -104,13 +98,11 @@ function highlightNav() {
     if (window.scrollY >= sec.offsetTop - 120) current = sec.id;
   });
   navItems.forEach(a => {
-    a.style.color = a.getAttribute('href') === '#' + current
-      ? 'var(--accent)' : '';
+    a.style.color = a.getAttribute('href') === '#' + current ? 'var(--accent)' : '';
   });
 }
 window.addEventListener('scroll', highlightNav);
 
-/* ── SMOOTH SCROLL (with offset for fixed nav) ─────────────── */
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     const target = document.querySelector(a.getAttribute('href'));
