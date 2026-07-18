@@ -1,0 +1,457 @@
+/* ============================================================
+   Goitom Portfolio — RAG Chatbot Widget Styles
+   All selectors are scoped under .ggc- (Goitom-Gemed-Chat) so
+   nothing here can leak into or clash with the portfolio's CSS.
+   ============================================================ */
+
+:root {
+  /* ---- Theme tokens: change these 8 lines to match your site ---- */
+  --ggc-bg: #0f1720;              /* chat window background */
+  --ggc-bg-elevated: #16212e;     /* header / input bar background */
+  --ggc-accent: #22d3c9;          /* primary accent (buttons, user bubble) */
+  --ggc-accent-hover: #1ab8af;
+  --ggc-text: #e6edf3;            /* primary text on dark bg */
+  --ggc-text-muted: #8b98a5;
+  --ggc-bubble-ai: #1c2936;       /* AI message bubble background */
+  --ggc-border: rgba(255, 255, 255, 0.08);
+  --ggc-radius: 16px;
+  --ggc-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+  /* Matches the portfolio's body typeface (Outfit, already loaded on
+     index.html), so the widget doesn't introduce a third font family. */
+  --ggc-font: "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* ---------- Launcher button ---------- */
+.ggc-launcher {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--ggc-accent), var(--ggc-accent-hover));
+  border: none;
+  box-shadow: var(--ggc-shadow);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9998;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  font-family: var(--ggc-font);
+}
+
+.ggc-launcher:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 24px 70px rgba(34, 211, 201, 0.35);
+}
+
+.ggc-launcher:focus-visible {
+  outline: 3px solid var(--ggc-accent);
+  outline-offset: 3px;
+}
+
+.ggc-launcher svg {
+  width: 26px;
+  height: 26px;
+  stroke: #04141a;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.ggc-launcher .ggc-icon-close {
+  position: absolute;
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.6);
+}
+
+.ggc-launcher.ggc-open .ggc-icon-chat {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.6);
+}
+
+.ggc-launcher.ggc-open .ggc-icon-close {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+/* Unread / attention pulse ring, dormant by default */
+.ggc-launcher .ggc-pulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--ggc-accent);
+  opacity: 0;
+}
+
+.ggc-launcher.ggc-attention .ggc-pulse {
+  animation: ggc-pulse-ring 2.2s ease-out infinite;
+}
+
+@keyframes ggc-pulse-ring {
+  0%   { opacity: 0.55; transform: scale(1); }
+  100% { opacity: 0;    transform: scale(1.6); }
+}
+
+/* ---------- Chat window ---------- */
+.ggc-window {
+  position: fixed;
+  bottom: 96px;
+  right: 24px;
+  width: 380px;
+  height: 560px;
+  max-height: calc(100vh - 120px);
+  background: var(--ggc-bg);
+  border-radius: var(--ggc-radius);
+  border: 1px solid var(--ggc-border);
+  box-shadow: var(--ggc-shadow);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: var(--ggc-font);
+  z-index: 9999;
+
+  opacity: 0;
+  transform: translateY(16px) scale(0.97);
+  pointer-events: none;
+  transform-origin: bottom right;
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+
+.ggc-window.ggc-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.ggc-window.ggc-minimized {
+  height: 60px;
+}
+
+.ggc-window.ggc-minimized .ggc-body,
+.ggc-window.ggc-minimized .ggc-input-bar {
+  display: none;
+}
+
+/* ---------- Header ---------- */
+.ggc-header {
+  background: var(--ggc-bg-elevated);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid var(--ggc-border);
+  flex-shrink: 0;
+  cursor: default;
+}
+
+.ggc-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--ggc-accent), #6366f1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 13px;
+  color: #04141a;
+  flex-shrink: 0;
+}
+
+.ggc-header-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.ggc-header-title {
+  color: var(--ggc-text);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.ggc-header-status {
+  color: var(--ggc-text-muted);
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 2px;
+}
+
+.ggc-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #34d399;
+  flex-shrink: 0;
+}
+
+.ggc-header-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.ggc-icon-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: var(--ggc-text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.ggc-icon-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--ggc-text);
+}
+
+.ggc-icon-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ---------- Message body ---------- */
+.ggc-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  scroll-behavior: smooth;
+}
+
+.ggc-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.ggc-body::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 3px;
+}
+
+.ggc-row {
+  display: flex;
+  gap: 8px;
+  max-width: 100%;
+  animation: ggc-fade-in 0.25s ease both;
+}
+
+@keyframes ggc-fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.ggc-row.ggc-user {
+  justify-content: flex-end;
+}
+
+.ggc-bubble {
+  padding: 10px 13px;
+  border-radius: 14px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  max-width: 80%;
+  word-wrap: break-word;
+}
+
+.ggc-row.ggc-ai .ggc-bubble {
+  background: var(--ggc-bubble-ai);
+  color: var(--ggc-text);
+  border-bottom-left-radius: 4px;
+}
+
+.ggc-row.ggc-user .ggc-bubble {
+  background: var(--ggc-accent);
+  color: #04141a;
+  border-bottom-right-radius: 4px;
+  font-weight: 500;
+}
+
+.ggc-bubble p {
+  margin: 0 0 6px 0;
+}
+
+.ggc-bubble p:last-child {
+  margin-bottom: 0;
+}
+
+.ggc-mini-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--ggc-accent), #6366f1);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  color: #04141a;
+  margin-top: 2px;
+}
+
+/* ---------- Typing indicator ---------- */
+.ggc-typing {
+  display: flex;
+  gap: 4px;
+  padding: 12px 14px;
+  background: var(--ggc-bubble-ai);
+  border-radius: 14px;
+  border-bottom-left-radius: 4px;
+  width: fit-content;
+}
+
+.ggc-typing span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ggc-text-muted);
+  animation: ggc-typing-bounce 1.2s ease-in-out infinite;
+}
+
+.ggc-typing span:nth-child(2) { animation-delay: 0.15s; }
+.ggc-typing span:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes ggc-typing-bounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+  30%           { transform: translateY(-5px); opacity: 1; }
+}
+
+/* ---------- Suggested questions (shown on first open) ---------- */
+.ggc-suggestions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.ggc-suggestion {
+  text-align: left;
+  background: var(--ggc-bg-elevated);
+  border: 1px solid var(--ggc-border);
+  color: var(--ggc-text);
+  padding: 9px 12px;
+  border-radius: 10px;
+  font-size: 12.5px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+  font-family: var(--ggc-font);
+}
+
+.ggc-suggestion:hover {
+  border-color: var(--ggc-accent);
+  background: rgba(34, 211, 201, 0.08);
+}
+
+/* ---------- Input bar ---------- */
+.ggc-input-bar {
+  border-top: 1px solid var(--ggc-border);
+  padding: 10px;
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  background: var(--ggc-bg-elevated);
+  flex-shrink: 0;
+}
+
+.ggc-input {
+  flex: 1;
+  background: var(--ggc-bg);
+  border: 1px solid var(--ggc-border);
+  border-radius: 12px;
+  color: var(--ggc-text);
+  padding: 10px 12px;
+  font-size: 13.5px;
+  font-family: var(--ggc-font);
+  resize: none;
+  max-height: 90px;
+  line-height: 1.4;
+}
+
+.ggc-input:focus {
+  outline: none;
+  border-color: var(--ggc-accent);
+}
+
+.ggc-input::placeholder {
+  color: var(--ggc-text-muted);
+}
+
+.ggc-send-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  border: none;
+  background: var(--ggc-accent);
+  color: #04141a;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.15s ease, transform 0.1s ease, opacity 0.15s ease;
+}
+
+.ggc-send-btn:hover:not(:disabled) {
+  background: var(--ggc-accent-hover);
+}
+
+.ggc-send-btn:active:not(:disabled) {
+  transform: scale(0.94);
+}
+
+.ggc-send-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.ggc-send-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ---------- Footer disclaimer ---------- */
+.ggc-footer-note {
+  text-align: center;
+  font-size: 10.5px;
+  color: var(--ggc-text-muted);
+  padding: 4px 0 8px;
+  background: var(--ggc-bg-elevated);
+}
+
+/* ---------- Responsive: full-screen on mobile ---------- */
+@media (max-width: 480px) {
+  .ggc-window {
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    border-radius: 0;
+  }
+
+  .ggc-launcher {
+    bottom: 16px;
+    right: 16px;
+  }
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .ggc-launcher,
+  .ggc-window,
+  .ggc-row,
+  .ggc-typing span,
+  .ggc-launcher .ggc-pulse {
+    animation: none !important;
+    transition: none !important;
+  }
+}
