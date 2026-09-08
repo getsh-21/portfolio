@@ -29,7 +29,7 @@
   // at your local uvicorn server. In Step 7 (deployment), this
   // gets changed to your real Render URL, e.g.
   // "https://goitom-rag-backend.onrender.com/api/chat"
- const BACKEND_URL = "https://goitom-rag-backend.onrender.com/api/chat";
+ const BACKEND_URL = "https://goitom-rag-backend.onrender.com/api/chat"; 
 
   // ---- State ----------------------------------------------------
   let isOpen = false;

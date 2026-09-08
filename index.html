@@ -8,16 +8,27 @@
   <meta name="author" content="Goitom Gebreslassie" />
   <title>Goitom Gebreslassie | Portfolio</title>
 
+  <!-- Fonts: Clash Display (display) + Cabinet Grotesk (body) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Styles -->
   <link rel="stylesheet" href="css/style.css" />
+
+  <!-- RAG Chatbot Widget stylesheet -->
   <link rel="stylesheet" href="chatbot/chatbot.css" />
 </head>
 <body>
 
-  <!-- NAVBAR -->
+  <!-- ─── CURSOR ────────────────────────────────────────────── -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- ─── NAVBAR ─────────────────────────────────────────────── -->
   <nav class="navbar" id="navbar">
     <div class="nav-inner">
       <a href="#hero" class="nav-logo">GG<span class="dot">.</span></a>
@@ -33,7 +44,7 @@
         <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
           <i class="fas fa-moon" id="themeIcon"></i>
         </button>
-        <a href="Goitom_cv.pdf" download="Goitom_cv.pdf" class="btn-cv">
+        <a href="Goitom_cv.pdf" download="Goitom_Gebreslassie_CV.pdf" class="btn-cv">
           <i class="fas fa-download"></i> Download CV
         </a>
         <button class="hamburger" id="hamburger" aria-label="Menu">
@@ -43,12 +54,13 @@
     </div>
   </nav>
 
-  <!-- HERO -->
+  <!-- ─── HERO ──────────────────────────────────────────────── -->
   <section class="hero" id="hero">
     <div class="hero-bg">
       <div class="hero-grid"></div>
       <div class="hero-blob blob1"></div>
       <div class="hero-blob blob2"></div>
+      <div class="hero-noise"></div>
     </div>
     <div class="hero-inner">
       <div class="hero-text" data-aos="fade-right">
@@ -56,7 +68,7 @@
         <h1 class="hero-name">Goitom<br /><em>Gebreslassie</em></h1>
         <p class="hero-title" id="typedTitle"></p>
         <p class="hero-summary">
-          MIT student &amp; Founder of <strong>Gemed Solutions</strong> — building scalable web applications,
+          MIT student & Founder of <strong>Gemed Solutions</strong> — building scalable web applications,
           AI-driven solutions, and leading technology teams from concept to deployment.
         </p>
         <div class="hero-cta">
@@ -71,24 +83,22 @@
       </div>
       <div class="hero-photo" data-aos="fade-left">
         <div class="photo-ring"></div>
+        <div class="photo-ring photo-ring--2"></div>
         <div class="photo-frame">
-          <img
-            src="assets/goitom_professional_photo.jpg"
-            alt="Goitom Gebreslassie"
-            onerror="this.onerror=null; this.src='assets/goitom_professional_photo.JPG';"
-          />
+          <img src="assets/goitom_professional_photo.jpg" alt="Goitom Gebreslassie"
+               onerror="this.style.display='none'; this.parentElement.classList.add('photo-fallback')" />
         </div>
         <div class="photo-badge photo-badge--1"><i class="fas fa-code"></i> Full Stack Dev</div>
         <div class="photo-badge photo-badge--2"><i class="fas fa-brain"></i> AI / ML</div>
       </div>
     </div>
-    <div class="scroll-hint">
+    <a href="#about" class="scroll-hint" aria-label="Scroll down">
       <span>Scroll</span>
       <div class="scroll-line"></div>
-    </div>
+    </a>
   </section>
 
-  <!-- ABOUT -->
+  <!-- ─── ABOUT ─────────────────────────────────────────────── -->
   <section class="section about" id="about">
     <div class="container">
       <div class="section-label" data-aos="fade-up">Who I Am</div>
@@ -103,21 +113,21 @@
           </p>
           <p>
             I specialize in developing scalable web applications using <strong>React, Node.js, Express.js, MongoDB</strong>,
-            and JavaScript, alongside hands-on experience in <strong>AI &amp; Machine Learning</strong> — including
+            and JavaScript, alongside hands-on experience in <strong>AI & Machine Learning</strong> — including
             predictive models, credit risk assessment systems, and data-driven decision support tools.
           </p>
           <p>
             As a leader, I thrive in collaborative environments where I can manage technical teams, drive product
             strategy, and conduct strategic market analysis to identify high-impact opportunities.
           </p>
-          <a href="Goitom_cv.pdf" download="Goitom_cv.pdf" class="btn-primary" style="margin-top:1.5rem; display:inline-flex; gap:.5rem; align-items:center;">
+          <a href="Goitom_cv.pdf" download="Goitom_Gebreslassie_CV.pdf" class="btn-primary" style="margin-top:1.5rem; display:inline-flex; gap:.5rem; align-items:center;">
             <i class="fas fa-download"></i> Download CV
           </a>
         </div>
         <div class="about-cards" data-aos="fade-left">
           <div class="about-card">
             <div class="about-card-icon"><i class="fas fa-rocket"></i></div>
-            <h4>Founder &amp; Leader</h4>
+            <h4>Founder & Leader</h4>
             <p>Founded Gemed Solutions, leading product, engineering, and market research teams.</p>
           </div>
           <div class="about-card">
@@ -140,12 +150,13 @@
     </div>
   </section>
 
-  <!-- SKILLS -->
+  <!-- ─── SKILLS ────────────────────────────────────────────── -->
   <section class="section skills" id="skills">
     <div class="container">
       <div class="section-label" data-aos="fade-up">What I Know</div>
       <h2 class="section-title" data-aos="fade-up">Technical Skills</h2>
       <div class="skills-grid">
+
         <div class="skill-category" data-aos="fade-up" data-aos-delay="0">
           <div class="skill-cat-header">
             <div class="skill-cat-icon"><i class="fas fa-laptop-code"></i></div>
@@ -161,6 +172,7 @@
             <span class="skill-tag">Responsive Design</span>
           </div>
         </div>
+
         <div class="skill-category" data-aos="fade-up" data-aos-delay="80">
           <div class="skill-cat-header">
             <div class="skill-cat-icon"><i class="fas fa-server"></i></div>
@@ -169,11 +181,13 @@
           <div class="skill-tags">
             <span class="skill-tag">Node.js</span>
             <span class="skill-tag">Express.js</span>
+            <span class="skill-tag">NestJS</span>
             <span class="skill-tag">REST APIs</span>
-            <span class="skill-tag">Auth &amp; Authorization</span>
+            <span class="skill-tag">Auth & Authorization</span>
             <span class="skill-tag">Socket.io</span>
           </div>
         </div>
+
         <div class="skill-category" data-aos="fade-up" data-aos-delay="160">
           <div class="skill-cat-header">
             <div class="skill-cat-icon"><i class="fas fa-database"></i></div>
@@ -185,10 +199,11 @@
             <span class="skill-tag">Database Design</span>
           </div>
         </div>
+
         <div class="skill-category" data-aos="fade-up" data-aos-delay="240">
           <div class="skill-cat-header">
             <div class="skill-cat-icon"><i class="fas fa-brain"></i></div>
-            <h3>AI &amp; Machine Learning</h3>
+            <h3>AI & Machine Learning</h3>
           </div>
           <div class="skill-tags">
             <span class="skill-tag">Machine Learning</span>
@@ -200,6 +215,7 @@
             <span class="skill-tag">Scikit-Learn</span>
           </div>
         </div>
+
         <div class="skill-category" data-aos="fade-up" data-aos-delay="320">
           <div class="skill-cat-header">
             <div class="skill-cat-icon"><i class="fas fa-tasks"></i></div>
@@ -214,10 +230,11 @@
             <span class="skill-tag">Risk Management</span>
           </div>
         </div>
+
         <div class="skill-category" data-aos="fade-up" data-aos-delay="400">
           <div class="skill-cat-header">
             <div class="skill-cat-icon"><i class="fas fa-users"></i></div>
-            <h3>Leadership &amp; Communication</h3>
+            <h3>Leadership & Communication</h3>
           </div>
           <div class="skill-tags">
             <span class="skill-tag">Team Leadership</span>
@@ -227,16 +244,18 @@
             <span class="skill-tag">Problem Solving</span>
           </div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- EXPERIENCE -->
+  <!-- ─── EXPERIENCE ────────────────────────────────────────── -->
   <section class="section experience" id="experience">
     <div class="container">
       <div class="section-label" data-aos="fade-up">My Journey</div>
       <h2 class="section-title" data-aos="fade-up">Experience</h2>
       <div class="timeline">
+
         <div class="timeline-item" data-aos="fade-up">
           <div class="timeline-dot"></div>
           <div class="timeline-content">
@@ -244,7 +263,7 @@
               <span class="timeline-company">Gemed Solutions</span>
               <span class="timeline-period">Present</span>
             </div>
-            <h3 class="timeline-role">Founder &amp; Software Development Lead</h3>
+            <h3 class="timeline-role">Founder & Software Development Lead</h3>
             <ul class="timeline-list">
               <li>Leading software development initiatives from concept to production deployment</li>
               <li>Managing project planning, execution, and cross-functional team coordination</li>
@@ -257,6 +276,7 @@
             </div>
           </div>
         </div>
+
         <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
           <div class="timeline-dot"></div>
           <div class="timeline-content">
@@ -276,16 +296,18 @@
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- PROJECTS -->
+  <!-- ─── PROJECTS ──────────────────────────────────────────── -->
   <section class="section projects" id="projects">
     <div class="container">
       <div class="section-label" data-aos="fade-up">What I've Built</div>
       <h2 class="section-title" data-aos="fade-up">Featured Projects</h2>
       <div class="projects-grid">
+
         <div class="project-card" data-aos="fade-up" data-aos-delay="0">
           <div class="project-visual project-visual--1">
             <div class="project-icon-large"><i class="fas fa-handshake"></i></div>
@@ -308,6 +330,7 @@
             </div>
           </div>
         </div>
+
         <div class="project-card" data-aos="fade-up" data-aos-delay="120">
           <div class="project-visual project-visual--2">
             <div class="project-icon-large"><i class="fas fa-brain"></i></div>
@@ -330,15 +353,64 @@
             </div>
           </div>
         </div>
+
+        <div class="project-card" data-aos="fade-up" data-aos-delay="240">
+          <div class="project-visual project-visual--1">
+            <div class="project-icon-large"><i class="fas fa-chalkboard-teacher"></i></div>
+            <div class="project-glow"></div>
+          </div>
+          <div class="project-body">
+            <div class="project-number">03</div>
+            <h3 class="project-title">Tutor Management Platform</h3>
+            <p class="project-desc">
+              A full-stack tutor management system with three dedicated dashboards —
+              Student, Teacher, and Admin — supporting scheduling, payments, and
+              teacher payouts in one platform.
+            </p>
+            <div class="project-tech">
+              <span>React.js</span><span>NestJS</span><span>MongoDB</span><span>REST APIs</span>
+            </div>
+            <div class="project-links">
+              <a href="https://gg-tutor.netlify.app/" target="_blank" rel="noopener" class="btn-project">
+                <i class="fas fa-external-link-alt"></i> Live Demo
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card" data-aos="fade-up" data-aos-delay="320">
+          <div class="project-visual project-visual--2">
+            <div class="project-icon-large"><i class="fas fa-clipboard-check"></i></div>
+            <div class="project-glow"></div>
+          </div>
+          <div class="project-body">
+            <div class="project-number">04</div>
+            <h3 class="project-title">Fana Youth Sacco Attendance System</h3>
+            <p class="project-desc">
+              A full attendance management system built for Fana Youth Financial
+              Company, handling check-ins, absence detection, and reporting for
+              staff attendance tracking.
+            </p>
+            <div class="project-tech">
+              <span>React.js</span><span>Express.js</span><span>MongoDB</span><span>REST APIs</span>
+            </div>
+            <div class="project-links">
+              <a href="https://fana-youth-sacco-attendance1.netlify.app/" target="_blank" rel="noopener" class="btn-project">
+                <i class="fas fa-external-link-alt"></i> Live Demo
+              </a>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- EDUCATION -->
+  <!-- ─── EDUCATION ─────────────────────────────────────────── -->
   <section class="section education" id="education">
     <div class="container">
       <div class="section-label" data-aos="fade-up">Academic Background</div>
-      <h2 class="section-title" data-aos="fade-up">Education &amp; Certifications</h2>
+      <h2 class="section-title" data-aos="fade-up">Education & Certifications</h2>
       <div class="edu-grid">
         <div class="edu-main" data-aos="fade-right">
           <div class="edu-card">
@@ -359,13 +431,13 @@
           </div>
         </div>
         <div class="certs" data-aos="fade-left">
-          <h3 class="certs-title">Certifications &amp; Courses</h3>
+          <h3 class="certs-title">Certifications & Courses</h3>
           <div class="cert-list">
             <div class="cert-item"><i class="fas fa-certificate"></i><span>Full Stack Development</span></div>
             <div class="cert-item"><i class="fas fa-certificate"></i><span>Artificial Intelligence</span></div>
             <div class="cert-item"><i class="fas fa-certificate"></i><span>Machine Learning</span></div>
             <div class="cert-item"><i class="fas fa-certificate"></i><span>Project Management</span></div>
-            <div class="cert-item"><i class="fas fa-certificate"></i><span>Leadership &amp; Communication</span></div>
+            <div class="cert-item"><i class="fas fa-certificate"></i><span>Leadership & Communication</span></div>
             <div class="cert-item"><i class="fas fa-certificate"></i><span>Software Engineering</span></div>
             <div class="cert-item"><i class="fas fa-certificate"></i><span>Data Science</span></div>
           </div>
@@ -374,7 +446,7 @@
     </div>
   </section>
 
-  <!-- ACHIEVEMENTS -->
+  <!-- ─── ACHIEVEMENTS ──────────────────────────────────────── -->
   <section class="section achievements" id="achievements">
     <div class="container">
       <div class="section-label" data-aos="fade-up">Milestones</div>
@@ -398,17 +470,17 @@
         </div>
         <div class="ach-card" data-aos="zoom-in" data-aos-delay="320">
           <div class="ach-icon"><i class="fas fa-users-cog"></i></div>
-          <p>Led <strong>software development</strong> &amp; market research teams</p>
+          <p>Led <strong>software development</strong> & market research teams</p>
         </div>
         <div class="ach-card" data-aos="zoom-in" data-aos-delay="400">
           <div class="ach-icon"><i class="fas fa-chart-bar"></i></div>
-          <p>Continuously expanding expertise in <strong>AI &amp; modern tech</strong></p>
+          <p>Continuously expanding expertise in <strong>AI & modern tech</strong></p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CONTACT -->
+  <!-- ─── CONTACT ───────────────────────────────────────────── -->
   <section class="section contact" id="contact">
     <div class="container">
       <div class="section-label" data-aos="fade-up">Get In Touch</div>
@@ -419,23 +491,35 @@
       <div class="contact-grid" data-aos="fade-up">
         <a href="mailto:gsgoitom02@gmail.com" class="contact-card">
           <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-          <div><h4>Email</h4><p>gsgoitom02@gmail.com</p></div>
+          <div>
+            <h4>Email</h4>
+            <p>gsgoitom02@gmail.com</p>
+          </div>
         </a>
         <a href="https://github.com/getsh-21" target="_blank" rel="noopener" class="contact-card">
           <div class="contact-icon"><i class="fab fa-github"></i></div>
-          <div><h4>GitHub</h4><p>github.com/getsh-21</p></div>
+          <div>
+            <h4>GitHub</h4>
+            <p>github.com/getsh-21</p>
+          </div>
         </a>
         <a href="https://www.linkedin.com/in/oitom-gebreslassie/" target="_blank" rel="noopener" class="contact-card">
           <div class="contact-icon"><i class="fab fa-linkedin"></i></div>
-          <div><h4>LinkedIn</h4><p>Goitom Gebreslassie</p></div>
+          <div>
+            <h4>LinkedIn</h4>
+            <p>Goitom Gebreslassie</p>
+          </div>
         </a>
         <a href="tel:+251904927045" class="contact-card">
           <div class="contact-icon"><i class="fas fa-phone"></i></div>
-          <div><h4>Phone</h4><p>+251 904 927 045</p></div>
+          <div>
+            <h4>Phone</h4>
+            <p>+251 904 927 045</p>
+          </div>
         </a>
       </div>
       <div class="contact-cta" data-aos="fade-up">
-        <a href="Goitom_cv.pdf" download="Goitom_cv.pdf" class="btn-primary btn-lg">
+        <a href="Goitom_cv.pdf" download="Goitom_Gebreslassie_CV.pdf" class="btn-primary btn-lg">
           <i class="fas fa-download"></i> Download CV
         </a>
         <a href="mailto:gsgoitom02@gmail.com" class="btn-outline btn-lg">
@@ -445,12 +529,12 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- ─── FOOTER ────────────────────────────────────────────── -->
   <footer class="footer">
     <div class="container">
       <div class="footer-inner">
         <span class="footer-logo">GG<span class="dot">.</span></span>
-        <p>© 2026 Goitom Gebreslassie. All rights reserved.</p>
+        <p>© 2025 Goitom Gebreslassie. All rights reserved.</p>
         <div class="footer-socials">
           <a href="https://github.com/getsh-21" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
           <a href="https://www.linkedin.com/in/oitom-gebreslassie/" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a>
@@ -461,6 +545,8 @@
   </footer>
 
   <script src="js/main.js"></script>
+
+  <!-- RAG Chatbot Widget script -->
   <script src="chatbot/chatbot.js" defer></script>
 </body>
 </html>
